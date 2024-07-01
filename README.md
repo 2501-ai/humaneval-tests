@@ -2,6 +2,13 @@
 
 This repository contains tests for evaluating code completions using the HumanEval dataset with 2501. Here's an overview of the key files and directories:
 
+## Results
+
+- random10 : 1.0 pass@1
+- large70 : 1.0 pass@1
+- full163 : 0.96951 pass@1
+
+
 ## Files
 
 ### random10.jsonl
@@ -16,6 +23,14 @@ This is the file containing proposed solutions (completions) for the programming
 
 This file holds the results of evaluating the completions in `random10-completion.jsonl`. Each line in this JSON Lines file corresponds to the evaluation of a single completion, including metrics like pass rate, error rate, and execution time. The `task_id` is also included to map the results back to the original tasks and completions.
 
+### full163-completion.jsonl
+
+This file contains a comprehensive set of 163 programming tasks from the HumanEval dataset, including task descriptions and function signatures but without solutions. Each task is identified by a unique `task_id`, and the file is in JSON Lines format.
+
+### full163-completion.jsonl_results.jsonl
+
+This file holds the results of evaluating the completions in `full163-completion.jsonl`. Each line in this JSON Lines file corresponds to the evaluation of a single completion, including metrics like pass rate, error rate, and execution time. The `task_id` is also included to map the results back to the original tasks and completions.
+
 ## Folders
 
 ### random10_scripts
@@ -25,20 +40,16 @@ This folder contains a set of 10 programming tasks from the HumanEval dataset. T
 
 This folder holds an even larger set of programming tasks, allowing for extensive testing of code completion capabilities across a wide range of problems.
 
+### full163_scripts
+
+This folder contains the complete set of 163 programming tasks from the HumanEval dataset. It provides the most comprehensive evaluation of code generation capabilities across a wide variety of problems.
+
 ## Usage
 
-To use the test bench and submit your code completions for evaluation, follow these steps:
+We use the [OpenAI HumanEval library](https://github.com/openai/human-eval) to evaluate our performances
 
-1. Review the programming tasks in `random10.jsonl` to understand the problems that need to be solved.
+Ex: 
+```evaluate_functional_correctness full163-completion.jsonl --problem_file=HumanEval.jsonl```
 
-2. Generate completions (solutions) for the tasks and save them in `random10-completion.jsonl`. Each completion should be associated with the corresponding `task_id`.
-
-3. Submit your `random10-completion.jsonl` file to the HumanEval evaluation script. The script will execute your completions against the test cases and generate results in `random10-completion.jsonl_results.jsonl`.
-
-4. Analyze the results in `random10-completion.jsonl_results.jsonl` to determine the performance of your code generation model. Key metrics to consider include pass rate, error rate, and execution time.
-
-For a more comprehensive evaluation, you can use the larger sets of programming tasks provided in the `random70_scripts` and `large70_scripts` folders. These datasets offer a greater variety and complexity of problems to test the capabilities of your code generation model.
-
-To submit your completions for the larger datasets, follow the same process as described above, but use the corresponding `.jsonl` files in the respective folders.
-
-The HumanEval evaluation script will run your submitted completions against the predefined test cases and generate detailed results, allowing you to assess the performance and effectiveness of your code generation approach.
+## Contact
+hello@2501.ai
